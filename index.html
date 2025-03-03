@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Happy Women's Day 2025</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Roboto:wght@300;400&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* General Styling */
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: "Roboto", sans-serif;
+        color: #ff4d94;
+        font-weight: 800;
+        overflow: hidden;
+        height: 100vh;
+        width: 100vw;
+        background: linear-gradient(135deg, #fff0f5, #ffe6f0);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      /* Background Carousel */
+      .background {
+        position: absolute;
+        top: 65%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 90%;
+        max-width: 1200px;
+        height: 50vh;
+        overflow: hidden;
+        border: 5px solid #fff;
+        border-radius: 15px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        z-index: 1;
+        visibility: hidden;
+        animation: showBackground 0.5s ease-in-out forwards;
+        animation-delay: 2s;
+      }
+
+      @keyframes showBackground {
+        from {
+          visibility: hidden;
+          transform: translate(-50%, -50%) scale(0.8);
+        }
+        to {
+          visibility: visible;
+          transform: translate(-50%, -50%) scale(1);
+        }
+      }
+
+      .image-strip {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: calc(
+          300px * 28
+        ); /* 14 ảnh gốc + 14 ảnh lặp = 28 ảnh, mỗi ảnh 300px */
+        height: 100%;
+        display: flex;
+        animation: scroll-circular 42s linear infinite; /* Tăng thời gian cho 14 ảnh */
+      }
+
+      .image-strip img {
+        width: 300px;
+        height: 100%;
+        object-fit: cover;
+        flex-shrink: 0;
+      }
+
+      @keyframes scroll-circular {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(
+            calc(-300px * 14)
+          ); /* Dịch chuyển đúng 14 ảnh */
+        }
+      }
+
+      .background::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          to right,
+          rgba(255, 255, 255, 0.5),
+          rgba(255, 255, 255, 0),
+          rgba(255, 255, 255, 0.5)
+        );
+        z-index: 1;
+      }
+
+      /* Fog Effect */
+      .fog {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 200%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.1);
+        animation: fog-move 15s linear infinite;
+      }
+
+      @keyframes fog-move {
+        0% {
+          transform: translateX(-50%);
+        }
+        100% {
+          transform: translateX(0);
+        }
+      }
+
+      /* Main Content */
+      .content-wrapper {
+        position: relative;
+        z-index: 1000;
+        text-align: center;
+        padding: 20px;
+        max-width: 90%;
+      }
+
+      h1 {
+        font-size: 4.5rem;
+        font-family: "Dancing Script", cursive;
+        margin: 0 0 20px;
+        text-shadow: 2px 2px 10px rgba(255, 75, 148, 0.3);
+        letter-spacing: 2px;
+        line-height: 1.1;
+      }
+
+      p {
+        font-size: 1.8rem;
+        font-family: "Roboto", sans-serif;
+        font-weight: 800;
+        line-height: 1.5;
+        margin: 0;
+        text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      .letter {
+        opacity: 0;
+        animation: fadeIn 0.05s forwards;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(15px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Gift and Flower Animation */
+      .gift,
+      .flower {
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        z-index: 1000;
+        animation: float 6s infinite ease-in-out;
+      }
+
+      .gift {
+        background: url("https://img.icons8.com/emoji/48/000000/gift.png")
+          no-repeat center;
+        background-size: contain;
+      }
+
+      .flower {
+        font-size: 40px;
+        text-align: center;
+      }
+
+      @keyframes float {
+        0% {
+          transform: translateY(20vh);
+          opacity: 1;
+        } /* Bắt đầu từ dưới thấp hơn */
+        100% {
+          transform: translateY(-80vh);
+          opacity: 0;
+        }
+      }
+
+      /* Audio */
+      #backgroundMusic {
+        width: 0;
+        height: 0;
+        border: none;
+        visibility: hidden;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        h1 {
+          font-size: 2.8rem;
+          margin-bottom: 15px;
+        }
+        p {
+          font-size: 1.3rem;
+        }
+        .background {
+          top: 70%;
+          height: 40vh;
+        }
+        .image-strip img {
+          width: 200px;
+        }
+        .gift,
+        .flower {
+          width: 30px;
+          height: 30px;
+          font-size: 30px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        h1 {
+          font-size: 2rem;
+        }
+        p {
+          font-size: 1rem;
+        }
+        .background {
+          height: 30vh;
+        }
+        .image-strip img {
+          width: 150px;
+        }
+      }
+
+      /* Music Button */
+      .music-control {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 2000;
+        background: #ff4d94;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+        cursor: pointer;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      .music-control:hover {
+        background: #ff66a3;
+      }
+    </style>
+  </head>
+  <body>
+    <audio id="backgroundMusic" loop>
+      <source src="./music.mp3" type="audio/mpeg" />
+      Your browser does not support the audio element.
+    </audio>
+
+    <!-- Background Carousel -->
+    <div class="background">
+      <div class="image-strip"></div>
+    </div>
+    <div class="fog"></div>
+
+    <!-- Main Content -->
+    <div class="content-wrapper">
+      <h1 id="title-happy"></h1>
+      <p id="valentine-text"></p>
+    </div>
+
+    <button class="music-control" id="musicButton">▶️</button>
+
+    <!-- JavaScript -->
+    <script>
+      const audio = document.getElementById("backgroundMusic");
+      const musicButton = document.getElementById("musicButton");
+      let isPlaying = false;
+
+      // Music control
+      musicButton.addEventListener("click", function () {
+        if (isPlaying) {
+          audio.pause();
+          musicButton.textContent = "▶️";
+        } else {
+          audio.play();
+          musicButton.textContent = "⏸️";
+        }
+        isPlaying = !isPlaying;
+      });
+
+      // Try autoplay
+      audio
+        .play()
+        .then(() => {
+          isPlaying = true;
+          musicButton.textContent = "⏸️";
+        })
+        .catch((error) => {
+          console.log("Autoplay blocked:", error);
+        });
+
+      //   window.onload = function () {
+      //     const audio = document.getElementById("backgroundMusic");
+
+      //     // Thử phát nhạc ngay khi trang tải
+      //     const playPromise = audio.play();
+
+      //     if (playPromise !== undefined) {
+      //       playPromise
+      //         .then(() => {
+      //           console.log("Nhạc đang phát thành công!");
+      //         })
+      //         .catch((error) => {
+      //           console.log("Autoplay bị chặn:", error);
+      //           // Nếu bị chặn, hiển thị thông báo hoặc đợi tương tác người dùng
+      //           document.body.addEventListener("click", function () {
+      //             audio.play(); // Phát nhạc khi người dùng nhấp vào trang
+      //             console.log("Nhạc phát sau khi người dùng nhấp!");
+      //           });
+      //         });
+      //     }
+      //   };
+
+      const titleItem = "Happy Women's Day 8/3";
+      const text = `Hôm nay, ngày 8/3 – ngày Quốc tế Phụ nữ, JUNO xin gửi đến tất cả những người phụ nữ thân yêu, đặc biệt là các chị em đang đồng hành cùng đại gia đình JUNO, lời tri ân sâu sắc và chân thành nhất. Dù bạn là người mẹ, người vợ, người chị hay cô gái độc lập tự tin theo đuổi đam mê, bạn luôn mang đến sự ấm áp, niềm vui và nguồn cảm hứng tích cực cho mọi người xung quanh.
+
+        Từ xa xưa, người phụ nữ đã luôn là biểu tượng của sự hy sinh thầm lặng, tần tảo chăm lo cho tổ ấm gia đình. Ngày nay, hình ảnh người phụ nữ hiện đại càng trở nên rạng rỡ hơn khi họ không chỉ giỏi việc nhà mà còn tự tin khẳng định bản thân trong mọi lĩnh vực. Tại JUNO, chúng tôi luôn tự hào vì có những bóng hồng đầy nhiệt huyết, tài năng và sáng tạo – những người góp phần làm nên thành công và giá trị cốt lõi của thương hiệu.
+
+        Nhân ngày đặc biệt này, JUNO xin gửi đến toàn thể chị em lời chúc tốt đẹp nhất: Chúc chị em luôn mạnh khỏe, hạnh phúc, bình an và tràn đầy năng lượng để tỏa sáng mỗi ngày. Mong rằng dù cuộc sống có bộn bề hay áp lực đến đâu, chị em vẫn giữ được nụ cười tươi tắn, ánh mắt long lanh và trái tim ấm áp. Hãy nhớ rằng, mỗi bước đi của chị em đều là một nét đẹp riêng, và JUNO luôn ở đây để đồng hành, tôn vinh phong cách và cá tính của bạn.
+
+        Một lần nữa, chúc tất cả chị em phụ nữ một ngày 8/3 thật ý nghĩa và đáng nhớ. Cảm ơn vì đã luôn là chính mình – những người phụ nữ tuyệt vời! ❤️`;
+
+      const title = document.getElementById("title-happy");
+      const container = document.getElementById("valentine-text");
+
+      function showTitle() {
+        return new Promise((resolve) => {
+          let titleIndex = 0;
+          function addTitleLetter() {
+            if (titleIndex < titleItem.length) {
+              let span = document.createElement("span");
+              span.textContent = titleItem[titleIndex];
+              span.style.animationDelay = `${titleIndex * 50}ms`;
+              title.appendChild(span);
+              titleIndex++;
+              setTimeout(addTitleLetter, 70);
+            } else {
+              resolve();
+            }
+          }
+          addTitleLetter();
+        });
+      }
+
+      function showLetter() {
+        let index = 0;
+        function addTextLetter() {
+          if (index < text.length) {
+            if (text[index] === "\n") {
+              container.appendChild(document.createElement("br"));
+            } else {
+              const span = document.createElement("span");
+              span.textContent = text[index];
+              span.classList.add("letter");
+              span.style.animationDelay = `${index * 30}ms`;
+              container.appendChild(span);
+            }
+            index++;
+            setTimeout(addTextLetter, 50);
+          }
+        }
+        addTextLetter();
+      }
+
+      showTitle().then(() => {
+        setTimeout(showLetter, 3000);
+      });
+
+      // Image List - Replace with your own images
+      const backgroundImages = [
+        "./img1.jpg",
+        "./img2.jpg",
+        "./img3.jpg",
+        "./img4.jpg",
+        "./img5.jpg",
+        "./img6.jpg",
+        "./img7.jpg",
+        "./img8.jpg",
+        "./img9.jpg",
+        "./img10.jpg",
+        "./img11.jpg",
+        "./img12.jpg",
+        "./img13.jpg",
+        "./img14.jpg",
+      ];
+
+      const imageStrip = document.querySelector(".image-strip");
+      function addImagesToStrip() {
+        const images = [...backgroundImages, ...backgroundImages];
+        images.forEach((image) => {
+          const imgElement = document.createElement("img");
+          imgElement.src = image;
+          imageStrip.appendChild(imgElement);
+        });
+      }
+      addImagesToStrip();
+
+      // Gift and Flower Animation
+      function createFloatingItem() {
+        const isGift = Math.random() > 0.5;
+        const item = document.createElement("div");
+        item.classList.add(isGift ? "gift" : "flower");
+        if (!isGift) item.textContent = "🌸";
+
+        item.style.left = Math.random() * 100 + "vw";
+        item.style.animationDuration = Math.random() * 3 + 4 + "s";
+
+        document.body.appendChild(item);
+        setTimeout(() => item.remove(), 6000);
+      }
+
+      setInterval(createFloatingItem, 500);
+    </script>
+  </body>
+</html>
