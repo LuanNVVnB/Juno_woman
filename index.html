@@ -26,6 +26,7 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        position: relative; /* Thêm để chứa các thành phần absolute */
       }
 
       /* Background Carousel */
@@ -62,12 +63,10 @@
         position: absolute;
         top: 0;
         left: 0;
-        width: calc(
-          300px * 28
-        ); /* 14 ảnh gốc + 14 ảnh lặp = 28 ảnh, mỗi ảnh 300px */
+        width: calc(300px * 28);
         height: 100%;
         display: flex;
-        animation: scroll-circular 42s linear infinite; /* Tăng thời gian cho 14 ảnh */
+        animation: scroll-circular 42s linear infinite;
       }
 
       .image-strip img {
@@ -82,9 +81,7 @@
           transform: translateX(0);
         }
         100% {
-          transform: translateX(
-            calc(-300px * 14)
-          ); /* Dịch chuyển đúng 14 ảnh */
+          transform: translateX(calc(-300px * 14));
         }
       }
 
@@ -131,6 +128,9 @@
         text-align: center;
         padding: 20px;
         max-width: 90%;
+        max-height: 50vh; /* Giới hạn chiều cao nội dung */
+        overflow-y: auto; /* Cho phép cuộn khi text dài */
+        box-sizing: border-box;
       }
 
       h1 {
@@ -143,7 +143,7 @@
       }
 
       p {
-        font-size: 1.8rem;
+        font-size: 24px;
         font-family: "Roboto", sans-serif;
         font-weight: 800;
         line-height: 1.5;
@@ -192,7 +192,7 @@
         0% {
           transform: translateY(20vh);
           opacity: 1;
-        } /* Bắt đầu từ dưới thấp hơn */
+        }
         100% {
           transform: translateY(-80vh);
           opacity: 0;
@@ -207,6 +207,31 @@
         visibility: hidden;
       }
 
+      /* Music Button */
+      .music-control {
+        position: fixed;
+        bottom: 15px;
+        right: 15px;
+        z-index: 2000;
+        background: #ff4d94;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+        cursor: pointer;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+      }
+
+      .music-control:hover {
+        background: #ff66a3;
+      }
+
       /* Responsive Design */
       @media (max-width: 768px) {
         h1 {
@@ -214,20 +239,42 @@
           margin-bottom: 15px;
         }
         p {
-          font-size: 1.3rem;
+          font-size: 16px;
+        }
+        .content-wrapper {
+          max-height: 40vh; /* Giảm chiều cao tối đa trên tablet */
         }
         .background {
           top: 70%;
-          height: 40vh;
+          height: 35vh;
+          width: 95%;
         }
         .image-strip img {
           width: 200px;
+        }
+        .image-strip {
+          width: calc(200px * 28);
+        }
+        @keyframes scroll-circular {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(calc(-200px * 14));
+          }
         }
         .gift,
         .flower {
           width: 30px;
           height: 30px;
           font-size: 30px;
+        }
+        .music-control {
+          width: 40px;
+          height: 40px;
+          font-size: 16px;
+          bottom: 10px;
+          right: 10px;
         }
       }
 
@@ -236,35 +283,44 @@
           font-size: 2rem;
         }
         p {
-          font-size: 1rem;
+          font-size: 12px;
+        }
+        .content-wrapper {
+          max-height: 35vh; /* Giảm chiều cao tối đa trên mobile */
+          padding: 10px;
         }
         .background {
-          height: 30vh;
+          top: 65%;
+          height: 25vh;
+          width: 90%;
         }
         .image-strip img {
           width: 150px;
         }
-      }
-
-      /* Music Button */
-      .music-control {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        z-index: 2000;
-        background: #ff4d94;
-        color: white;
-        border: none;
-        border-radius: 50%;
-        width: 50px;
-        height: 50px;
-        font-size: 20px;
-        cursor: pointer;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-      }
-
-      .music-control:hover {
-        background: #ff66a3;
+        .image-strip {
+          width: calc(150px * 28);
+        }
+        @keyframes scroll-circular {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(calc(-150px * 14));
+          }
+        }
+        .gift,
+        .flower {
+          width: 25px;
+          height: 25px;
+          font-size: 25px;
+        }
+        .music-control {
+          width: 35px;
+          height: 35px;
+          font-size: 14px;
+          bottom: 8px;
+          right: 8px;
+        }
       }
     </style>
   </head>
@@ -317,36 +373,14 @@
           console.log("Autoplay blocked:", error);
         });
 
-      //   window.onload = function () {
-      //     const audio = document.getElementById("backgroundMusic");
-
-      //     // Thử phát nhạc ngay khi trang tải
-      //     const playPromise = audio.play();
-
-      //     if (playPromise !== undefined) {
-      //       playPromise
-      //         .then(() => {
-      //           console.log("Nhạc đang phát thành công!");
-      //         })
-      //         .catch((error) => {
-      //           console.log("Autoplay bị chặn:", error);
-      //           // Nếu bị chặn, hiển thị thông báo hoặc đợi tương tác người dùng
-      //           document.body.addEventListener("click", function () {
-      //             audio.play(); // Phát nhạc khi người dùng nhấp vào trang
-      //             console.log("Nhạc phát sau khi người dùng nhấp!");
-      //           });
-      //         });
-      //     }
-      //   };
-
       const titleItem = "Happy Women's Day 8/3";
       const text = `Hôm nay, ngày 8/3 – ngày Quốc tế Phụ nữ, JUNO xin gửi đến tất cả những người phụ nữ thân yêu, đặc biệt là các chị em đang đồng hành cùng đại gia đình JUNO, lời tri ân sâu sắc và chân thành nhất. Dù bạn là người mẹ, người vợ, người chị hay cô gái độc lập tự tin theo đuổi đam mê, bạn luôn mang đến sự ấm áp, niềm vui và nguồn cảm hứng tích cực cho mọi người xung quanh.
 
-        Từ xa xưa, người phụ nữ đã luôn là biểu tượng của sự hy sinh thầm lặng, tần tảo chăm lo cho tổ ấm gia đình. Ngày nay, hình ảnh người phụ nữ hiện đại càng trở nên rạng rỡ hơn khi họ không chỉ giỏi việc nhà mà còn tự tin khẳng định bản thân trong mọi lĩnh vực. Tại JUNO, chúng tôi luôn tự hào vì có những bóng hồng đầy nhiệt huyết, tài năng và sáng tạo – những người góp phần làm nên thành công và giá trị cốt lõi của thương hiệu.
+          Từ xa xưa, người phụ nữ đã luôn là biểu tượng của sự hy sinh thầm lặng, tần tảo chăm lo cho tổ ấm gia đình. Ngày nay, hình ảnh người phụ nữ hiện đại càng trở nên rạng rỡ hơn khi họ không chỉ giỏi việc nhà mà còn tự tin khẳng định bản thân trong mọi lĩnh vực. Tại JUNO, chúng tôi luôn tự hào vì có những bóng hồng đầy nhiệt huyết, tài năng và sáng tạo – những người góp phần làm nên thành công và giá trị cốt lõi của thương hiệu.
 
-        Nhân ngày đặc biệt này, JUNO xin gửi đến toàn thể chị em lời chúc tốt đẹp nhất: Chúc chị em luôn mạnh khỏe, hạnh phúc, bình an và tràn đầy năng lượng để tỏa sáng mỗi ngày. Mong rằng dù cuộc sống có bộn bề hay áp lực đến đâu, chị em vẫn giữ được nụ cười tươi tắn, ánh mắt long lanh và trái tim ấm áp. Hãy nhớ rằng, mỗi bước đi của chị em đều là một nét đẹp riêng, và JUNO luôn ở đây để đồng hành, tôn vinh phong cách và cá tính của bạn.
+          Nhân ngày đặc biệt này, JUNO xin gửi đến toàn thể chị em lời chúc tốt đẹp nhất: Chúc chị em luôn mạnh khỏe, hạnh phúc, bình an và tràn đầy năng lượng để tỏa sáng mỗi ngày. Mong rằng dù cuộc sống có bộn bề hay áp lực đến đâu, chị em vẫn giữ được nụ cười tươi tắn, ánh mắt long lanh và trái tim ấm áp. Hãy nhớ rằng, mỗi bước đi của chị em đều là một nét đẹp riêng, và JUNO luôn ở đây để đồng hành, tôn vinh phong cách và cá tính của bạn.
 
-        Một lần nữa, chúc tất cả chị em phụ nữ một ngày 8/3 thật ý nghĩa và đáng nhớ. Cảm ơn vì đã luôn là chính mình – những người phụ nữ tuyệt vời! ❤️`;
+          Một lần nữa, chúc tất cả chị em phụ nữ một ngày 8/3 thật ý nghĩa và đáng nhớ. Cảm ơn vì đã luôn là chính mình – những người phụ nữ tuyệt vời! ❤️`;
 
       const title = document.getElementById("title-happy");
       const container = document.getElementById("valentine-text");
@@ -372,6 +406,7 @@
 
       function showLetter() {
         let index = 0;
+        const delay = window.innerWidth <= 480 ? 20 : 30; // Giảm delay trên mobile
         function addTextLetter() {
           if (index < text.length) {
             if (text[index] === "\n") {
@@ -380,18 +415,18 @@
               const span = document.createElement("span");
               span.textContent = text[index];
               span.classList.add("letter");
-              span.style.animationDelay = `${index * 30}ms`;
+              span.style.animationDelay = `${index * delay}ms`;
               container.appendChild(span);
             }
             index++;
-            setTimeout(addTextLetter, 50);
+            setTimeout(addTextLetter, window.innerWidth <= 480 ? 30 : 50); // Giảm tốc độ trên mobile
           }
         }
         addTextLetter();
       }
 
       showTitle().then(() => {
-        setTimeout(showLetter, 3000);
+        setTimeout(showLetter, 2000); // Giảm thời gian chờ trên mobile
       });
 
       // Image List - Replace with your own images
